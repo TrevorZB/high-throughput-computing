@@ -1,0 +1,4 @@
+3a.) No modules are loaded when first logging in.
+3b.) gcc 8.3.1 is available without loading any other modules
+3c.) cuda versions available: 7, 7.5, 8, 8.0, 9, 9.0, 9.1, 10, 10.0, 10.1, 10.2, 11, 11.0, 11.1, 11.2
+3d.) anaconda: A distribution of python/R that is tailored towards data science.

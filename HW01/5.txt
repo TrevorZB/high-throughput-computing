@@ -1,0 +1,6 @@
+5a.) The slurm job on Euler begins execution in the current working directory (the directory that the user is in when they run the script). It does NOT depend on the directory the actual script is in.
+5b.) The SLURM_JOB_ID is an environment variable set by the Slurm Controller in the environment of the batch script. It stores the ID of the job allocation.
+5c.) squeue -u $USER -t RUNNING
+5d.) scancel <jobid> or scancel --name myJobName
+5e.) This line requests a single gpu when running the SLURM script
+5f.) This submits a job array, which includes multiple jobs to be executed with identical parameters. The script accesses the array from index 0 to index 9 with a step size of 1.
