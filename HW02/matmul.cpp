@@ -1,7 +1,7 @@
 #include "matmul.h"
 
 // using for testing purposes
-#include <iostream>
+// #include <iostream>
 
 void mmul1(const double* A, const double* B, double* C, const unsigned int n)
 {
@@ -63,15 +63,15 @@ void mmul4(const std::vector<double>& A, const std::vector<double>& B, double* C
     }
 }
 
-int main()
-{
-    const double A[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-    const double B[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-    double C[9] = {};
-    mmul2(A, B, C, 3);
-    for (std::size_t i = 0; i < 9; i++)
-    {
-        std::cout << C[i] << ", ";
-    }
-    std::cout << std::endl;
-}
+// int main()
+// {
+//     const double A[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+//     const double B[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+//     double C[9] = {};
+//     mmul2(A, B, C, 3);
+//     for (std::size_t i = 0; i < 9; i++)
+//     {
+//         std::cout << C[i] << ", ";
+//     }
+//     std::cout << std::endl;
+// }
