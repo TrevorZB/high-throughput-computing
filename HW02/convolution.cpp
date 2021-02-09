@@ -1,8 +1,5 @@
 #include "convolution.h"
 
-// only including this for using cout for testing purposes
-// #include <iostream>
-
 void convolve(const float *image, float *output, std::size_t n, const float *mask, std::size_t m)
 {
     std::size_t output_index, mask_index;
@@ -45,16 +42,3 @@ void convolve(const float *image, float *output, std::size_t n, const float *mas
         }
     }
 }
-
-// int main()
-// {
-//     const float image[]{1, 3, 4, 8, 6, 5, 2, 4, 3, 4, 6, 8, 1, 4, 5, 2};
-//     const float mask[]{1, 0, 0, 0, 1, 0, 0, 0, 1};
-//     float output[16];
-//     convolve(image, output, 4, mask, 3);
-//     for (std::size_t i = 0; i < 16; i++)
-//     {
-//         std::cout << output[i] << ", ";
-//     }
-//     std::cout << std::endl;
-// }
