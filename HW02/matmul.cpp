@@ -8,6 +8,7 @@ void mmul1(const double* A, const double* B, double* C, const unsigned int n)
         {
             for (unsigned int k = 0; k < n; k++)
             {
+                // index calculated for a 1D representation
                 C[(i * n) + j] += A[(i * n) + k] * B[(k * n) + j];
             }
         }
@@ -23,6 +24,7 @@ void mmul2(const double* A, const double* B, double* C, const unsigned int n)
         {
             for (unsigned int j = 0; j < n; j++)
             {
+                // index calculated for a 1D representation
                 C[(i * n) + j] += A[(i * n) + k] * B[(k * n) + j];
             }
         }
@@ -38,6 +40,7 @@ void mmul3(const double* A, const double* B, double* C, const unsigned int n)
         {
             for (unsigned int i = 0; i < n; i++)
             {
+                // index calculated for a 1D representation
                 C[(i * n) + j] += A[(i * n) + k] * B[(k * n) + j];
             }
         }
@@ -54,6 +57,7 @@ void mmul4(const std::vector<double>& A, const std::vector<double>& B, double* C
         {
             for (unsigned int k = 0; k < n; k++)
             {
+                // index calculated for a 1D representation
                 C[(i * n) + j] += A[(i * n) + k] * B[(k * n) + j];
             }
         }

@@ -14,9 +14,11 @@ int main(int argc, char *argv[])
     sscanf(argv[1], "%zu", &n);
     float *list = new float[n];
 
+    // randomize the seed, create distribution
     std::default_random_engine gen{static_cast<long unsigned int>(time(0))};
     std::uniform_real_distribution<float> dist(-1.0, 1.0);
 
+    // initialize array with random floats between -1.0 and 1.0
     for (std::size_t i = 0; i < n; i++)
     {
         list[i] = dist(gen);

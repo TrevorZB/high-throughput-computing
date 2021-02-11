@@ -16,10 +16,12 @@ int main(int argc, char *argv[])
     float *image = new float[n * n];
     float *mask = new float[m * m];
 
+    // randomize the seed, create separate distributions for image/mask
     std::default_random_engine gen{static_cast<long unsigned int>(time(0))};
     std::uniform_real_distribution<float> image_dist(-10.0, 10.0);
     std::uniform_real_distribution<float> mask_dist(-1.0, 1.0);
 
+    // initialize image and mask arrays with random values in specified ranges
     for (std::size_t i = 0; i < (n * n); i++)
     {
         image[i] = image_dist(gen);
