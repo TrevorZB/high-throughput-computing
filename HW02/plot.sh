@@ -9,6 +9,6 @@
 #SBATCH --error=Plot.err
 
 for (( i=10; i <= 30; i=i+1 )); do
-    val=2**i
+    val=$((2**$i))
     ./task1 $val
 done

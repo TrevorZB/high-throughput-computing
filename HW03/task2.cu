@@ -1,5 +1,6 @@
 #include <cuda.h>
 #include <stdio.h>
+#include <chrono>
 #include <random>
 
 __global__ void calc_kernel(int a, int *dA, int dim) 
@@ -12,7 +13,8 @@ __global__ void calc_kernel(int a, int *dA, int dim)
 int random_int()
 {
     // randomize the seed, create distribution
-    std::default_random_engine gen{static_cast<long unsigned int>(time(0))};
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 gen(seed);
     std::uniform_int_distribution<int> int_dist(1, 100);
 
     // return random int between 1 and 100
