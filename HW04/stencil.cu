@@ -43,10 +43,11 @@ __global__ void stencil_kernel(const float* image, const float* mask, float* out
     // from global memory to shared memory
     for (int i = 0; i < work; i++)
     {
-        int i_index = thread_x * work + i; // FIX THIS, NEEDS TO INCLUDE BLOCK ID AS WELL SO CORRECT PARTS OF IMAGE ARE BROUGHT OVER
-        if (i_index < s_image_size - 1)
+        int s_i_index = thread_x * work + i;
+        int i_index = // index of the image that is brought over
+        if (s_i_index < s_image_size - 1)
         {
-            s_image[i_index] = image[i_index];
+            s_image[i_index] = image[i_index]; // ????? s_image index is probably supposed to be different than image index??
         }
     }
 
@@ -59,17 +60,19 @@ __global__ void stencil_kernel(const float* image, const float* mask, float* out
     for (int j = -R; j <= R; j++)
     {
         int image_val;
-        int image_index = thread_x + j; // MIGHT NEED TO FIX THIS? SHOULD USE THREAD.X ID TO INDEX SHARED MEMORY IMAGE SINCE WE ONLY BROUGHT A SLICE OF THE IMAGE OVER
-        if (image_index < 0 || image_index > n - 1)
+        int s_i_index = thread_x + j; // MIGHT NEED TO FIX THIS? SHOULD USE THREAD.X ID TO INDEX SHARED MEMORY IMAGE SINCE WE ONLY BROUGHT A SLICE OF THE IMAGE OVER
+        if (s_i_index < 0 || s_i_index > n - 1)
         {
             image_val = 1; // out of bounds, default value
         } else
         {
-            image_val = s_image[image_index]; // grab from shared memory
+            image_val = s_image[s_i_index]; // grab from shared memory
         }
         out += image_val * s_mask[j + R];
     }
     s_output[thread_x] = out;
+
+    // write shared memory output to global memory output
 }
 
 // Makes one call to stencil_kernel with threads_per_block threads per block.
