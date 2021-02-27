@@ -3,9 +3,7 @@
 #include <stdio.h>
 #include <random>
 #include <chrono>
-#include "matmul.cuh"
-
-#include <iostream>
+#include "reduce.cuh"
 
 void randomize_array(float *a, int size, float start, float stop)
 {
@@ -16,8 +14,7 @@ void randomize_array(float *a, int size, float start, float stop)
 
     for (int i = 0; i < size; i++)
     {
-        // a[i] = dist(gen);
-        a[i] = 1;
+        a[i] = dist(gen);
     }
 }
 
@@ -25,7 +22,7 @@ int main(int argc, char *argv[])
 {
     int n = atoi(argv[1]);
     int threads_per_block = atoi(argv[2]);
-    int blocks_per_grid = N / (threads_per_block * 2);
+    int blocks_per_grid = n / (threads_per_block * 2);
 
     float *input_host = new float[n];
     float *input_dev;
@@ -37,7 +34,7 @@ int main(int argc, char *argv[])
     cudaMemcpy(input_dev, input_host, sizeof(float) * n, cudaMemcpyHostToDevice);
 
     // create output array on device
-    cudaMalloc((void **)&output_dev, sizeof(float) * size);
+    cudaMalloc((void **)&output_dev, sizeof(float) * blocks_per_grid);
 
     // timing variables
     cudaEvent_t start;
@@ -59,6 +56,7 @@ int main(int argc, char *argv[])
     // copy sum to first element of host input array
     cudaMemcpy(input_host, input_dev, sizeof(float), cudaMemcpyDeviceToHost);
 
+    // prints for assignment
     printf("%f\n", input_host[0]);
     printf("%f\n", ms);
 

@@ -55,27 +55,30 @@ __global__ void stencil_kernel(const float* image, const float* mask, float* out
     // over the mask and image values
     __syncthreads();
 
-    // calculate the convolution summation
-    float out = 0.0;
-    for (int j = -R; j <= (int)R; j++)
+    // only threads within image index do the convolution
+    if (thread < n)
     {
-        float image_val;
-        int i_index = thread + j;
-        if (i_index < 0 || i_index > n - 1)
+        // calculate the convolution summation
+        float out = 0.0;
+        for (int j = -R; j <= (int)R; j++)
         {
-            image_val = 1.0; // out of bounds, default value
-        } else
-        {
-            int s_i_index = i_index - global_loc; // change to shared memory index
-            image_val = s_image[s_i_index]; // grab from shared memory
+            float image_val;
+            int i_index = thread + j;
+            if (i_index < 0 || i_index > n - 1)
+            {
+                image_val = 1.0; // out of bounds, default value
+            } else
+            {
+                int s_i_index = i_index - global_loc; // change to shared memory index
+                image_val = s_image[s_i_index]; // grab from shared memory
+            }
+            out += image_val * s_mask[j + R];
         }
-        out += image_val * s_mask[j + R];
+        s_output[thread_x] = out;
+
+        // write shared memory output to global memory output
+        output[thread] = s_output[thread_x];
     }
-    s_output[thread_x] = out;
-
-    // write shared memory output to global memory output
-    output[thread] = s_output[thread_x];
-
 }
 
 
