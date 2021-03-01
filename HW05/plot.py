@@ -1,36 +1,41 @@
 import matplotlib.pyplot as plt
 
-powers = range(10, 31)
+powers = range(5, 15)
 
 file_lines = []
-lines = []
-with open('task1024.out') as f:
+doubles = []
+floats = []
+ints = []
+with open('task2.out') as f:
     file_lines = f.read().splitlines()
 
 for i in range(len(file_lines)):
-    if i % 2 != 0:
-        lines.append(file_lines[i])
+    if i == 0:
+        continue
+    if i >= len(file_lines):
+        break
+    x = i + 1
+    if x % 9 == 0:
+        doubles.append(file_lines[i])
+    elif x % 6 == 0:
+        floats.append(file_lines[i])
+    elif x % 3 == 0:
+        ints.append(file_lines[i])
 
-lines = [float(l) for l in lines]
+doubles = [float(d) for d in doubles]
+floats = [float(d) for d in floats]
+ints = [float(d) for d in ints]
 
+print(doubles)
+print(floats)
+print(ints)
 
-file_lines1 = []
-lines1 = []
-with open('task512.out') as f:
-    file_lines1 = f.read().splitlines()
-
-for i in range(len(file_lines1)):
-    if i % 2 != 0:
-        lines1.append(file_lines1[i])
-
-lines1 = [float(l) for l in lines1]
-
-
-plt.plot(powers, lines, linestyle='--', color='blue', marker='o', label='1024')
-plt.plot(powers, lines1, linestyle=':', color='red', marker='x', label='512')
-plt.title('Assignment 4, Problem: 2c')
+plt.plot(powers, doubles, linestyle='--', color='blue', marker='o', label='TYPE=double, block_dim=32')
+plt.plot(powers, floats, linestyle='--', color='red', marker='o', label='TYPE=float, block_dim=32')
+plt.plot(powers, ints, linestyle='--', color='green', marker='o', label='TYPE=int, block_dim=32')
+plt.title('Assignment 5, Problem: 2c')
 plt.xlabel('n')
-plt.xticks(range(10, 31, 2))
+plt.xticks(range(5, 14, 1))
 plt.ylabel('time (ms)')
 plt.legend()
-plt.savefig('task1.pdf')
+plt.savefig('task2.pdf')
