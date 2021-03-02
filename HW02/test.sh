@@ -1,7 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-for (( i=5; i <= 10; i=i+1 )); do
-    val=$((2**i))
-    echo "val: " + $val
-    ./task1 $val
-done
+#SBATCH -p wacc
+
+#SBATCH --job-name=test
+
+#SBATCH --output=test.out
+
+#SBATCH --error=test.err
+
+val=$((2**5))
+./test val

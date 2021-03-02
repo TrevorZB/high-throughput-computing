@@ -5,7 +5,6 @@
 #include <chrono>
 #include "matmul.cuh"
 
-#include <iostream>
 
 void randomize_array_int(int *a, int size, int start, int stop)
 {
