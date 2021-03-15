@@ -49,8 +49,11 @@ int main(int argc, char *argv[])
     float ms;
     cudaEventElapsedTime(&ms, start, stop);
 
-    int *values_end = thrust::raw_pointer_cast(&values[values.size() - 1]);
-    int *counts_end = thrust::raw_pointer_cast(&counts[counts.size() - 1]);
+    thrust::host_vector<int> h_values = values;
+    thrust::host_vector<int> h_counts = counts;
+
+    int *values_end = thrust::raw_pointer_cast(&h_values[h_values.size() - 1]);
+    int *counts_end = thrust::raw_pointer_cast(&h_counts[h_counts.size() - 1]);
 
     printf("%d\n", *values_end);
     printf("%d\n", *counts_end);
