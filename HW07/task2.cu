@@ -6,6 +6,7 @@
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <thrust/reduce.h>
+#include "count.cuh"
 
 void randomize_vector_int(thrust::host_vector<int> &h_vec, int start, int stop)
 {
@@ -24,10 +25,12 @@ void randomize_vector_int(thrust::host_vector<int> &h_vec, int start, int stop)
 int main(int argc, char *argv[])
 {
     int n = atoi(argv[1]);
-    thrust::host_vector<float> h_vec(n);
-    randomize_vector_float(h_vec, -1.0, 1.0);
+    thrust::host_vector<int> h_vec(n);
+    randomize_vector_int(h_vec, 0, 500);
 
-    thrust::device_vector<float> d_vec = h_vec;
+    thrust::device_vector<int> d_vec = h_vec;
+    thrust::device_vector<int> values(n);
+    thrust::device_vector<int> counts(n);
 
     // timing variables
     cudaEvent_t start;
@@ -37,7 +40,7 @@ int main(int argc, char *argv[])
 
     cudaEventRecord(start);
     
-    // calculation here
+    count(d_vec, values, counts);
 
     cudaEventRecord(stop);
     cudaEventSynchronize(stop);
@@ -46,6 +49,10 @@ int main(int argc, char *argv[])
     float ms;
     cudaEventElapsedTime(&ms, start, stop);
 
-    printf("%f\n", result);
+    int *values_end = thrust::raw_pointer_cast(&values[values.size() - 1]);
+    int *counts_end = thrust::raw_pointer_cast(&counts[counts.size() - 1]);
+
+    printf("%d\n", *values_end);
+    printf("%d\n", *counts_end);
     printf("%f\n", ms);
 }
