@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from math import log
 
 powers = range(10, 31)
 file_lines = []
@@ -11,7 +10,7 @@ for i in range(len(file_lines)):
     if i % 2 != 0:
         lines.append(file_lines[i])
 
-lines = [log(float(l), 10) for l in lines]
+lines = [float(l) for l in lines]
 
 
 file_lines1 = []
@@ -23,7 +22,7 @@ for i in range(len(file_lines1)):
     if i % 2 != 0:
         lines1.append(file_lines1[i])
 
-lines1 = [log(float(l), 10) for l in lines1]
+lines1 = [float(l) for l in lines1]
 
 
 file_lines2 = []
@@ -35,7 +34,7 @@ for i in range(len(file_lines2)):
     if i % 2 != 0:
         lines2.append(file_lines2[i])
 
-lines2 = [log(float(l), 10) for l in lines2]
+lines2 = [float(l) for l in lines2]
 
 
 file_lines3 = []
@@ -47,7 +46,7 @@ for i in range(len(file_lines3)):
     if i % 2 != 0:
         lines3.append(file_lines3[i])
 
-lines3 = [log(float(l), 10) for l in lines3]
+lines3 = [float(l) for l in lines3]
 
 
 plt.plot(powers, lines, linestyle='--', color='blue', marker='o', label='HW05, threads_per_block=1024')
@@ -58,5 +57,6 @@ plt.title('HW07, Problem: 1c')
 plt.xlabel('n')
 plt.xticks(range(10, 31, 2))
 plt.ylabel('time (ms)')
+plt.yscale('log', base=10)
 plt.legend()
 plt.savefig('task1.pdf')
