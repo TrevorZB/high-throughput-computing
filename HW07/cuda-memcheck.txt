@@ -1,0 +1,5 @@
+485
+1
+63.363232
+========= CUDA-MEMCHECK
+========= ERROR SUMMARY: 0 errors
