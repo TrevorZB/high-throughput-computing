@@ -3,17 +3,28 @@ import matplotlib.pyplot as plt
 powers = range(1, 11)
 file_lines = []
 lines = []
-with open('task1.out') as f:
+with open('task1fixed.out') as f:
     file_lines = f.read().splitlines()
 
 for i in range(len(file_lines)):
-    if (i + 1) % 3 == 0:
-        lines.append(file_lines[i])
+    lines.append(file_lines[i])
 
 lines = [float(l) for l in lines]
 
 
-plt.plot(powers, lines, linestyle='--', color='blue', marker='o', label='cluster function')
+file_lines1 = []
+lines1 = []
+with open('task1bad.out') as f:
+    file_lines1 = f.read().splitlines()
+
+for i in range(len(file_lines1)):
+    lines1.append(file_lines1[i])
+
+lines1 = [float(l) for l in lines1]
+
+
+plt.plot(powers, lines, linestyle='--', color='blue', marker='o', label='without false share')
+plt.plot(powers, lines1, linestyle='--', color='red', marker='o', label='with false share')
 plt.title('HW09, Problem: 1c')
 plt.xlabel('# threads')
 plt.xticks(range(1, 11, 1))
