@@ -6,5 +6,8 @@
 
 std::vector<unsigned char> hex_string_to_bytes(std::string hex_string);
 void add_spaces_to_hex_str(std::string &hex_str);
+unsigned int get_time(std::string time_stamp);
+void reverse_hex_string(std::string &hex_string);
+std::string uncompact_bits(unsigned int bits);
 
 #endif

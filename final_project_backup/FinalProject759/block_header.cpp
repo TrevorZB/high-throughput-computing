@@ -1,19 +1,7 @@
 #include "block_header.h"
 #include "helpers.h"
-#include <sstream>
-#include <iomanip>
 #include <algorithm>
 
-
-unsigned int get_time(std::string time_stamp)
-{
-    std::tm t = {};
-    std::istringstream stream(time_stamp);
-
-    stream >> std::get_time(&t, "%Y-%m-%d %H:%M:%S");
-    std::time_t time = mktime(&t);
-    return time;
-}
 
 void init_block_header(
     BlockHeader &block_header,
