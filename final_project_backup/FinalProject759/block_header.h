@@ -14,12 +14,6 @@ struct BlockHeader
     unsigned int nonce;
 };
 
-std::vector<unsigned char> hex_string_to_bytes(std::string hex_string);
-
-unsigned int get_time(std::string time_str);
-
-void add_spaces_to_hex_str(std::string &hex_str);
-
 void init_block_header(
     BlockHeader &block_header,
     unsigned int version,

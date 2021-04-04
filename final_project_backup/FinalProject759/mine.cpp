@@ -3,9 +3,8 @@
 #include "helpers.h"
 
 
-bool mine(BlockHeader &block_header)
+bool mine(BlockHeader &block_header, const std::string &target)
 {
-    std::string bits = uncompact_bits(block_header.bits);
     unsigned char *byte_array = (unsigned char*)&block_header;
     std::vector<unsigned char> byte_array_vec(byte_array, byte_array + 80);
 
@@ -19,5 +18,5 @@ bool mine(BlockHeader &block_header)
     picosha2::hash256_hex_string(second_hash_str_vec, final_hash);
     reverse_hex_string(final_hash);
     
-    return final_hash < bits;
+    return final_hash < target;
 }

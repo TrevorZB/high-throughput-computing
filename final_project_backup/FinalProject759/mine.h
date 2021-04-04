@@ -3,6 +3,6 @@
 
 #include "block_header.h"
 
-bool mine(BlockHeader &block_header);
+bool mine(BlockHeader &block_header, const std::string &target);
 
 #endif
